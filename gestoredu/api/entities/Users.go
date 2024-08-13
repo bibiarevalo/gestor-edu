@@ -2,9 +2,11 @@ package entities
 
 import (
 	"github.com/pborman/uuid"
+	"gorm.io/gorm"
 )
 
 type Users struct {
+	gorm.Model
 	ID             string `json:"id"`
 	Nome           string `json:"nome"`
 	Sobrenome      string `json:"sobrenome"`
@@ -16,7 +18,7 @@ type Users struct {
 	DataNascimento string `json:"dataNascimento"`
 	Matricula      string `json:"matricula"`
 	Tipo           string `json:"tipo"`
-}
+} 
 
 type Administrador struct {
 	User      Users `gorm:"foreignKey:UserID;references:ID"`

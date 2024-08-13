@@ -8,22 +8,21 @@ import (
 	"gorm.io/gorm"
 )
 
-var DB *gorm.DB
+// var DB *gorm.DB
 
-func Db() {
+func Db() *gorm.DB {
 	dsn := "root:admin@tcp(127.0.0.1:3306)/defense"
 	//var v = "Não conseguiu conectar ao banco de dados"
-	db, _ := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	DB = db
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		fmt.Println(err.Error())
+		panic("Não está conectando ao banco de dados!")
+	}
+	// DB = db
 	db.AutoMigrate(&entities.Users{})
-	db.AutoMigrate(&entities.Administrador{})
-	db.AutoMigrate(&entities.Aluno{})
-	db.AutoMigrate(&entities.Professor{})
-	db.AutoMigrate(&entities.Responsavel{})
-	// if err != nil {
-	// 	panic(v)
-	// }
-	fmt.Println("conexão OK!")
-	fmt.Println(db)
+	// db.AutoMigrate(&entities.Administrador{})
+	// db.AutoMigrate(&entities.Aluno{})
+	// db.AutoMigrate(&entities.Professor{})
+	// db.AutoMigrate(&entities.Responsavel{})
 
 }
